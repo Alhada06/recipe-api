@@ -1,0 +1,7 @@
+# Use an official PHP Apache runtime
+FROM sail-8.4/app
+# Enable Apache modules
+RUN a2enmod rewrite
+# Install MongoDB extension
+RUN pecl install mongodb \
+    && docker-php-ext-enable mongodb

@@ -1,0 +1,16 @@
+FROM mysql/mysql-server:8.0
+
+# Copy the backup script into the container
+COPY backup-on-startup.sh /docker-entrypoint-initdb.d/backup-on-startup.sh
+
+# Set execution permissions
+RUN chmod +x /docker-entrypoint-initdb.d/backup-on-startup.sh
+
+# Define backup directory (optional)
+ENV BACKUP_DIR=/backup
+
+# Create backup directory inside the container
+RUN mkdir -p $BACKUP_DIR
+
+# Expose the backup directory as a volume
+VOLUME $BACKUP_DIR

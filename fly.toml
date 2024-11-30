@@ -1,0 +1,43 @@
+# fly.toml app configuration file generated for recipe-api-lively-hill-240 on 2024-11-30T23:23:07Z
+#
+# See https://fly.io/docs/reference/configuration/ for information about how to use this file.
+#
+
+app = 'recipe-api-lively-hill-240'
+primary_region = 'mad'
+console_command = 'php /var/www/html/artisan tinker'
+
+[build]
+  [build.args]
+    NODE_VERSION = '18'
+    PHP_VERSION = '8.2'
+
+[env]
+  APP_DEBUG = 'true'
+  APP_ENV = 'production'
+  APP_URL = 'https://recipe-api-white-smoke-879.fly.dev/'
+  DB_CONNECTION = 'mongodb'
+  DB_DATABASE = 'recipe_db'
+  DB_HOST = 'mysql-db-autumn-water-579.internal'
+  DB_PASSWORD = 'password'
+  DB_USERNAME = 'sail'
+  LOG_CHANNEL = 'stderr'
+  LOG_LEVEL = 'info'
+  LOG_STDERR_FORMATTER = 'Monolog\Formatter\JsonFormatter'
+  MONGODB_DATABASE = 'recipe_db'
+  MONGODB_URI = 'mongodb+srv://FullstackMongo:VgA1WPqfNTGep4PR@cluster0.pabcsze.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0'
+  SESSION_DRIVER = 'cookie'
+  SESSION_SECURE_COOKIE = 'true'
+
+[http_service]
+  internal_port = 8080
+  force_https = true
+  auto_stop_machines = 'stop'
+  auto_start_machines = true
+  min_machines_running = 0
+  processes = ['app']
+
+[[vm]]
+  memory = '1gb'
+  cpu_kind = 'shared'
+  cpus = 1
